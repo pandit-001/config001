@@ -1,6 +1,2 @@
-spring:
-  application:
-    name: subha-svc2
-
 server:
   port: 2222
