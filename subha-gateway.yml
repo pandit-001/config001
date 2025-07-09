@@ -1,0 +1,7 @@
+server:
+  port: 6666
+
+eureka:
+  client:
+    service-url:
+      default
