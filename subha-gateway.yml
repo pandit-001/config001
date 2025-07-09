@@ -10,12 +10,13 @@ spring:
   cloud:
     gateway:
       routes:
-      - id: unique-subha-svc1 # not svc name but an unique id
-        uri: lb://subha-svc1 # lb: load balancing, has to be same as svc name
-        predicates:
-        - Path=/subha-svc1/** # if the incoming request’s path starts with /subha-svc1/, this route applies.
-      - id: unique-subha-svc2
-        uri: lb://subha-svc2 # lb: load balancing
-        predicates:
-        - Path=/subha-svc2/** # if the incoming request’s path starts with /subha-svc2/, this route applies.  
-        
+        - id: unique-subha-svc1 # unique id
+          uri: lb://subha-svc1 # should match with svc name
+          predicates:
+            - Path=/subha-svc1/**
+
+        - id: unique-subha-svc2
+          uri: lb://subha-svc2
+          predicates:
+            - Path=/subha-svc2/**
+
