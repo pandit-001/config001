@@ -14,9 +14,13 @@ spring:
           uri: lb://subha-svc1 # should match with svc name
           predicates:
             - Path=/subha-svc1/**
+          filters:
+            - RewritePath=/subha-svc1/(?<segment>.*), /${segment}
 
         - id: unique-subha-svc2
           uri: lb://subha-svc2
           predicates:
             - Path=/subha-svc2/**
+          filters:
+            - RewritePath=/subha-svc2/(?<segment>.*), /${segment}  
 
