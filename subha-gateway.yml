@@ -22,10 +22,28 @@ spring:
           predicates:
             - Path=/subha-svc2/**
           filters:
-            - RewritePath=/subha-svc2/(?<segment>.*), /${segment}    
+            - RewritePath=/subha-svc2/(?<segment>.*), /${segment}
+            - name: CircuitBreaker
+              args:
+                name: subhaSvc1CircuitBreaker
+                fallbackUri: forward:/fallback/subhaSvc1Fallback
       default-filters: # security filters go there
         - SecureHeaders
         - AccessTokenSecurityFilter
         - TenantAvailabilityFilter
         - LoggingFilter
         - GlobalRetryGatewayFilter
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      subhaSvc1CircuitBreaker:
+        slidingWindowSize: 10
+        permittedNumberOfCallsInHalfOpenState: 5
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        recordExceptions:
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+      
