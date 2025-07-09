@@ -17,3 +17,9 @@ spring:
           filters:
             - RewritePath=/subha-svc1/(?<segment>.*), /${segment}
             
+        - id: unique-subha-svc1=2 # unique id
+          uri: lb://subha-svc2 # should match with svc name
+          predicates:
+            - Path=/subha-svc2/**
+          filters:
+            - RewritePath=/subha-svc2/(?<segment>.*), /${segment}    
