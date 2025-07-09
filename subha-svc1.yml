@@ -1,6 +1,2 @@
-spring:
-  application:
-    name: subha-svc1
-
 server:
   port: 1111
