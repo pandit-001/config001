@@ -23,3 +23,9 @@ spring:
             - Path=/subha-svc2/**
           filters:
             - RewritePath=/subha-svc2/(?<segment>.*), /${segment}    
+      default-filters: # security filters go there
+        - SecureHeaders
+        - AccessTokenSecurityFilter
+        - TenantAvailabilityFilter
+        - LoggingFilter
+        - GlobalRetryGatewayFilter
